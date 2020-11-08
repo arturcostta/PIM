@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1604272503 source:c:\users\augus\documents\trabalho rosane\pim\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1604772580 source:c:\users\augus\documents\trabalho rosane\pim\calcage.c
+	<stdio.h>
+	<time.h>
+	"calcAge.h"
+
+1604772391 c:\users\augus\documents\trabalho rosane\pim\calcage.h
+	<stdio.h>
+
