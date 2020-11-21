@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "calcAge.h"
+#include <locale.h>
 
 typedef struct endereco{
     char rua[50];
-    int numero;
+    char numero[4];
     char bairro[40];
     char cidade[40];
     char estado[3];
@@ -49,7 +50,7 @@ void login()
 
 void cadastrar()
 {
-    flush_in();
+    fflush(stdin);
     FILE *arq =fopen("data.bin", "ab");
 
     Paciente paciente;
@@ -58,44 +59,57 @@ void cadastrar()
 
     printf("Digite a data de nascimento(dd/MM/yyyy)\n");
     scanf("%d/%d/%d",&paciente.dia,&paciente.mes,&paciente.ano);
+    fflush(stdin);
 
-    flush_in();
     printf("Digite a comorbidade\n");
     fgets(paciente.comorbidade, 100, stdin);
 
     printf("Digite o CEP\n");
-    scanf("%s", paciente.end.CEP);
+    //scanf("%s", paciente.end.CEP);
+    fgets(paciente.end.CEP,8,stdin);
+    fflush(stdin);
 
     printf("Digite o cpf\n");
-    scanf("%s",paciente.cpf);
+    //scanf("%s",paciente.cpf);
+    fgets(paciente.cpf,8,stdin);
+    fflush(stdin);
 
     printf("Digite o telefone\n");
-    scanf("%s",paciente.telefone);
+    //scanf("%s",paciente.telefone);
+    fgets(paciente.telefone,11,stdin);
+    fflush(stdin);
 
-    printf("Digite a data do diagnostico\n");
-    scanf("%s",paciente.dataDiagnostico);
+    printf("Digite a data do diagnóstico\n");
+    //scanf("%s",paciente.dataDiagnostico);
+    fgets(paciente.dataDiagnostico,12,stdin);
+    fflush(stdin);
 
     printf("Digite o email\n");
-    scanf("%s",paciente.email);
+    //scanf("%s",paciente.email);
+    fgets(paciente.email,50,stdin);
+    fflush(stdin);
 
-    flush_in();
     printf("Digite o nome da  rua\n");
-    fgets(paciente.end.rua, 50, stdin);
+    //fgets(paciente.end.rua, 50, stdin);
+    fgets(paciente.end.rua,50,stdin);
+    fflush(stdin);
 
     printf("Digite o número\n");
-    scanf("%d", &paciente.end.numero);
+    //scanf("%d", &paciente.end.numero);
+    fgets(paciente.end.numero,4,stdin);
+    fflush(stdin);
 
-    flush_in();
     printf("Digite o bairro\n");
     fgets(paciente.end.bairro, 40,stdin);
+    fflush(stdin);
 
-    flush_in();
     printf("Digite o cidade\n");
     fgets(paciente.end.cidade, 40,stdin);
+    fflush(stdin);
 
-    flush_in();
     printf("Digite o estado\n");
-    scanf("%s",paciente.end.estado);
+    //scanf("%s",paciente.end.estado);
+    fgets(paciente.end.estado, 3,stdin);
 
     //verificar idade
     int idade = calcAge(paciente.dia,paciente.mes,paciente.ano);
@@ -142,7 +156,7 @@ void listar()
             printf("PACIENTE NUMERO : %d\n",cont+1);
             printf("Nome: %s", paciente.nome);
             printf("Cpf: %s - Data de Nascimento: %d/%d/%d - Telefone: %s\n",paciente.cpf, paciente.dia, paciente.mes, paciente.ano, paciente.telefone);
-            printf("Email: %s - Comorbidade: %s - Data do diagnostico %s\n",paciente.email, paciente.comorbidade, paciente.dataDiagnostico);
+            printf("Email: %sComorbidade: %sData do diagnóstico %s\n",paciente.email, paciente.comorbidade, paciente.dataDiagnostico);
             printf("Numero: %d - Rua: %s",paciente.end.numero, paciente.end.rua);
             printf("Bairro: %s",paciente.end.bairro);
             printf("Cidade: %s",paciente.end.cidade);
@@ -200,6 +214,7 @@ void printOpcoes()
 
 int main()
 {
+    setlocale(LC_ALL, "Portuguese");
     int continuar=1;
 
     do
@@ -208,6 +223,7 @@ int main()
         printf("\n\tSISTEMA DE CADASTROS DE DOENTES\n\n");
         printf("1. Login\n");
         printf("0. Sair\n");
+
 
         scanf("%d", &continuar);
         system("cls || clear");
